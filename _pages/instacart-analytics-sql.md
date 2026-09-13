@@ -385,7 +385,7 @@ select * from mart_timing_analysis limit 10;
 #168
 select count(*) from mart_timing_analysis
 
-```sql
+```
 
 
 ---
