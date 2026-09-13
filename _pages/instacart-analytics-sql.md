@@ -26,7 +26,7 @@ Staging models clean and standardize raw source tables. Each model maps directly
 
 ---
 /*create staging tables--------------------------------------------------------*/
-
+```sql
 USE instacart;
 
 select * from orders limit 10;
@@ -123,16 +123,18 @@ select count(*) from stg_products;
 SELECT * FROM stg_order_products LIMIT 10;
 /*33,819,106*/
 select count(*) from stg_order_products;
-
+```
 
 
 ---
 
 ## 2. Analysis Models
 
+---
+
 /*create analysis tables---------------------------------------------------------*/
 
-
+```sql
 #dim_products - full product catelog with aisle, department, and organic flag
 CREATE TABLE dim_products AS
 SELECT
@@ -266,7 +268,9 @@ SELECT COUNT(*) FROM fct_orders;
 
 SELECT COUNT(*) FROM dim_users;
 
-SHOW TABLES IN instacart;
+show tables IN instacart;
+```
+
 ---
 
 ## 3. Mart Tables Prepped for Tableau
@@ -275,7 +279,7 @@ SHOW TABLES IN instacart;
 
 /*prep tables for tableau csv load--------------------------------------*/
 
-
+```sql
 select * from stg_order_products limit 5;
 
 select * from dim_products limit 5;
@@ -381,7 +385,7 @@ select * from mart_timing_analysis limit 10;
 #168
 select count(*) from mart_timing_analysis
 
-```
+```sql
 
 
 ---
