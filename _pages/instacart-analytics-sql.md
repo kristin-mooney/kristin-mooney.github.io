@@ -16,7 +16,7 @@ toc_icon: "code"
 
 ---
 
-All SQL models are organized following a staging → intermediate → dimensions → facts → marts architecture. Each layer builds on the previous to produce clean, analysis-ready tables for Tableau.
+All SQL models are organized following a staging → analysis → marts architecture. Each layer builds on the previous to produce clean, analysis-ready tables for Tableau.
 
 ---
 
@@ -25,12 +25,12 @@ All SQL models are organized following a staging → intermediate → dimensions
 Staging models clean and standardize raw source tables. Each model maps directly to one source CSV file and handles nulls, adds readable labels, and applies consistent naming conventions.
 
 ---
+/*create staging tables--------------------------------------------------------*/
 
-### stg_orders
+USE instacart;
 
-Cleans the raw `orders` table. Adds a readable day name, time-of-day bucket, and reorder cycle bucket. Coalesces null `days_since_prior_order` values (present on each user's first order) to `0`.
+select * from orders limit 10;
 
-```sql
 CREATE OR REPLACE VIEW stg_orders AS
 SELECT
     order_id,
@@ -39,9 +39,12 @@ SELECT
     order_number,
     order_dow,
     CASE order_dow
-        WHEN 0 THEN 'Sunday'    WHEN 1 THEN 'Monday'
-        WHEN 2 THEN 'Tuesday'   WHEN 3 THEN 'Wednesday'
-        WHEN 4 THEN 'Thursday'  WHEN 5 THEN 'Friday'
+        WHEN 0 THEN 'Sunday'
+        WHEN 1 THEN 'Monday'
+        WHEN 2 THEN 'Tuesday'
+        WHEN 3 THEN 'Wednesday'
+        WHEN 4 THEN 'Thursday'
+        WHEN 5 THEN 'Friday'
         WHEN 6 THEN 'Saturday'
     END AS order_day_name,
     order_hour_of_day,
@@ -52,27 +55,22 @@ SELECT
         WHEN order_hour_of_day BETWEEN 15 AND 17 THEN 'Afternoon (3-5pm)'
         WHEN order_hour_of_day BETWEEN 18 AND 20 THEN 'Evening (6-8pm)'
         WHEN order_hour_of_day BETWEEN 21 AND 23 THEN 'Night (9-11pm)'
-        ELSE 'Overnight (0-4am)'
+        ELSE                                          'Overnight (0-4am)'
     END AS time_of_day_bucket,
     COALESCE(days_since_prior_order, 0) AS days_since_prior_order,
     CASE
-        WHEN days_since_prior_order IS NULL THEN 'First Order'
-        WHEN days_since_prior_order <= 3    THEN '0-3 days'
-        WHEN days_since_prior_order <= 7    THEN '4-7 days'
-        WHEN days_since_prior_order <= 14   THEN '8-14 days'
-        WHEN days_since_prior_order <= 21   THEN '15-21 days'
-        ELSE '22-30 days'
-    END AS reorder_cycle_bucket
+        WHEN days_since_prior_order IS NULL  THEN 'First Order'
+        WHEN days_since_prior_order <= 3     THEN '0-3 days'
+        WHEN days_since_prior_order <= 7     THEN '4-7 days'
+        WHEN days_since_prior_order <= 14    THEN '8-14 days'
+        WHEN days_since_prior_order <= 21    THEN '15-21 days'
+        ELSE                                      '22-30 days'
+    END AS reorder_cycle_bucket,
+    CASE WHEN order_number = 1 THEN 1 ELSE 0 END AS is_first_order
 FROM orders;
-```
 
----
+select * from products limit 10;
 
-### stg_products
-
-Cleans the raw `products` table and adds an `is_organic` flag based on the product name.
-
-```sql
 CREATE OR REPLACE VIEW stg_products AS
 SELECT
     product_id,
@@ -80,19 +78,15 @@ SELECT
     aisle_id,
     department_id,
     CASE
-        WHEN LOWER(product_name) LIKE '%organic%' THEN TRUE
-        ELSE FALSE
+        WHEN LOWER(product_name) LIKE '%organic%' THEN 1
+        ELSE 0
     END AS is_organic
 FROM products;
-```
 
----
+select * from order_products__prior limit 10;
 
-### stg_order_products
+select * from order_products__train limit 10;
 
-Unions the `order_products__prior` and `order_products__train` tables into a single clean view with a `source_set` label.
-
-```sql
 CREATE OR REPLACE VIEW stg_order_products AS
 SELECT
     order_id,
@@ -109,261 +103,284 @@ SELECT
     reordered,
     'train' AS source_set
 FROM order_products__train;
-```
+
+
+SHOW FULL TABLES IN instacart WHERE TABLE_TYPE = 'VIEW';
+
+#DATA INTEGRITY CHECKS
+SELECT * FROM stg_orders LIMIT 10;
+
+/*3,421,083*/
+SELECT COUNT(*) FROM stg_orders LIMIT 10;
+
+
+SELECT * FROM stg_products LIMIT 10;
+
+/*49,355*/
+select count(*) from stg_products;
+
+-- Should return rows from both 'prior' and 'train' source sets
+SELECT * FROM stg_order_products LIMIT 10;
+/*33,819,106*/
+select count(*) from stg_order_products;
+
+
 
 ---
 
-## 2. Intermediate Models
+## 2. Analysis Models
 
-Intermediate models join staging tables together into a single enriched dataset at the line-item grain, ready for downstream fact and dimension tables.
+/*create analysis tables---------------------------------------------------------*/
 
----
 
-### int_order_items_enriched
-
-Joins all five staging tables into a fully enriched line-item view — one row per product per order, with all order, product, aisle, and department context attached.
-
-```sql
-CREATE OR REPLACE VIEW int_order_items_enriched AS
-SELECT
-    op.order_id,
-    op.product_id,
-    op.add_to_cart_order,
-    op.reordered,
-    op.source_set,
-    o.user_id,
-    o.order_number,
-    o.order_day_name,
-    o.order_dow,
-    o.order_hour_of_day,
-    o.time_of_day_bucket,
-    o.days_since_prior_order,
-    o.reorder_cycle_bucket,
-    p.product_name,
-    p.is_organic,
-    p.aisle_id,
-    p.department_id,
-    a.aisle,
-    d.department
-FROM stg_order_products op
-JOIN stg_orders   o ON op.order_id    = o.order_id
-JOIN stg_products p ON op.product_id  = p.product_id
-JOIN aisles       a ON p.aisle_id     = a.aisle_id
-JOIN departments  d ON p.department_id = d.department_id;
-```
-
----
-
-## 3. Dimension Tables
-
-Dimension tables provide stable, descriptive reference data used across all fact and mart models.
-
----
-
-### dim_products
-
-Full product context: product name, organic flag, aisle, and department — all in one table.
-
-```sql
-CREATE OR REPLACE TABLE dim_products AS
+#dim_products - full product catelog with aisle, department, and organic flag
+CREATE TABLE dim_products AS
 SELECT
     p.product_id,
     p.product_name,
     p.is_organic,
     a.aisle_id,
-    a.aisle      AS aisle_name,
+    a.aisle,
     d.department_id,
-    d.department AS department_name
+    d.department
 FROM stg_products p
-JOIN aisles      a ON p.aisle_id      = a.aisle_id
-JOIN departments d ON p.department_id = d.department_id;
-```
+LEFT JOIN aisles      a 
+	ON p.aisle_id = a.aisle_id
+LEFT JOIN departments d 
+	ON p.department_id = d.department_id;
 
----
+SELECT * FROM dim_products LIMIT 5;
 
-### dim_users
+#create dim_users--one row summarizing full order history
+CREATE TABLE dim_users AS
+WITH user_orders AS (
+    SELECT
+        o.user_id,
+        COUNT(DISTINCT o.order_id)              AS total_orders,
+        AVG(o.days_since_prior_order)           AS avg_days_between_orders,
+        SUM(op.item_count)                      AS total_items_purchased,
+        AVG(op.item_count)                      AS avg_basket_size,
+        AVG(op.reorder_rate)                    AS reorder_rate
+    FROM stg_orders o
+    LEFT JOIN (
+        SELECT
+            order_id,
+            COUNT(*)                            AS item_count,
+            AVG(reordered)                      AS reorder_rate
+        FROM stg_order_products
+        GROUP BY order_id
+    ) op ON o.order_id = op.order_id
+    GROUP BY o.user_id
+),
 
-User-level behavioral profile: lifetime orders, preferred shopping day and hour, and shopper segment label.
+-- Find each user's most common order day
+fav_day AS (
+    SELECT user_id, order_day_name AS favorite_order_day
+    FROM (
+        SELECT
+            user_id,
+            order_day_name,
+            ROW_NUMBER() OVER (
+                PARTITION BY user_id
+                ORDER BY COUNT(*) DESC
+            ) AS rn
+        FROM stg_orders
+        GROUP BY user_id, order_day_name
+    ) ranked
+    WHERE rn = 1
+),
 
-```sql
-CREATE OR REPLACE TABLE dim_users AS
+-- Find each user's most common time of day
+fav_time AS (
+    SELECT user_id, time_of_day_bucket AS favorite_time_of_day
+    FROM (
+        SELECT
+            user_id,
+            time_of_day_bucket,
+            ROW_NUMBER() OVER (
+                PARTITION BY user_id
+                ORDER BY COUNT(*) DESC
+            ) AS rn
+        FROM stg_orders
+        GROUP BY user_id, time_of_day_bucket
+    ) ranked
+    WHERE rn = 1
+)
+
 SELECT
-    user_id,
-    COUNT(DISTINCT order_id)                         AS total_orders,
-    AVG(days_since_prior_order)                      AS avg_days_between_orders,
-    MODE() WITHIN GROUP (ORDER BY order_dow)         AS preferred_day_of_week,
-    MODE() WITHIN GROUP (ORDER BY order_hour_of_day) AS preferred_hour,
-    CASE
-        WHEN COUNT(DISTINCT order_id) >= 20 THEN 'Power Shopper'
-        WHEN COUNT(DISTINCT order_id) >= 10 THEN 'Regular Shopper'
-        WHEN COUNT(DISTINCT order_id) >= 5  THEN 'Occasional Shopper'
-        ELSE 'New / Infrequent Shopper'
-    END AS shopper_segment
-FROM stg_orders
-GROUP BY user_id;
-```
+    uo.user_id,
+    uo.total_orders,
+    uo.total_items_purchased,
+    ROUND(uo.avg_basket_size, 2)        AS avg_basket_size,
+    ROUND(uo.avg_days_between_orders, 1) AS avg_days_between_orders,
+    ROUND(uo.reorder_rate, 3)           AS reorder_rate,
+    fd.favorite_order_day,
+    ft.favorite_time_of_day
+FROM user_orders uo
+LEFT JOIN fav_day  fd 
+	ON uo.user_id = fd.user_id
+LEFT JOIN fav_time ft 
+	ON uo.user_id = ft.user_id;
 
----
+#quick data integrity check
+select * from dim_users limit 5;
 
-## 4. Fact Tables
+select count(*) from dim_users;
 
-Fact tables capture transactional data at the appropriate grain. Two fact tables are built: one at the order-item level and one at the order-header level.
-
----
-
-### fct_order_items
-
-One row per product per order. The lowest-grain table in the project — used for product-level analysis.
-
-```sql
-CREATE OR REPLACE TABLE fct_order_items AS
-SELECT
-    op.order_id,
-    op.product_id,
-    op.add_to_cart_order,
-    op.reordered,
-    op.source_set,
-    o.user_id,
-    o.order_number,
-    o.order_dow,
-    o.order_hour_of_day,
-    o.days_since_prior_order
-FROM stg_order_products op
-JOIN stg_orders o ON op.order_id = o.order_id;
-```
-
----
-
-### fct_orders
-
-One row per order. Aggregates basket size, reordered item count, and reorder percentage at the order level.
-
-```sql
-CREATE OR REPLACE TABLE fct_orders AS
+#fct_orders - one row per order with basket stats joined in
+CREATE TABLE fct_orders AS
 SELECT
     o.order_id,
     o.user_id,
     o.order_number,
-    o.order_dow,
     o.order_day_name,
+    o.order_dow,
     o.order_hour_of_day,
     o.time_of_day_bucket,
-    o.days_since_prior_order,
     o.reorder_cycle_bucket,
-    COUNT(op.product_id)                                    AS basket_size,
-    SUM(op.reordered)                                       AS reordered_items,
-    ROUND(
-        100.0 * SUM(op.reordered) /
-        NULLIF(COUNT(op.product_id), 0), 2
-    )                                                       AS reorder_pct
+    o.days_since_prior_order,
+    o.is_first_order,
+    COUNT(op.product_id)        AS basket_size,
+    ROUND(AVG(op.reordered), 3) AS reorder_rate,
+    SUM(op.reordered)           AS reordered_items,
+    SUM(CASE WHEN op.reordered = 0 THEN 1 ELSE 0 END) AS new_items
 FROM stg_orders o
-JOIN stg_order_products op ON o.order_id = op.order_id
-GROUP BY 1,2,3,4,5,6,7,8,9;
-```
+LEFT JOIN stg_order_products op 
+	ON o.order_id = op.order_id
+GROUP BY
+    o.order_id,
+    o.user_id,
+    o.order_number,
+    o.order_day_name,
+    o.order_dow,
+    o.order_hour_of_day,
+    o.time_of_day_bucket,
+    o.reorder_cycle_bucket,
+    o.days_since_prior_order,
+    o.is_first_order;
+    
+    #data integrity check
+    SELECT * FROM fct_orders LIMIT 5;
+
+SELECT COUNT(*) FROM fct_orders;
+
+SELECT COUNT(*) FROM dim_users;
+
+SHOW TABLES IN instacart;
+---
+
+## 3. Mart Tables Prepped for Tableau
 
 ---
 
-## 5. Mart Models
+/*prep tables for tableau csv load--------------------------------------*/
 
-Mart models are the business-ready, aggregated tables that feed directly into Tableau. Three marts power the final dashboards.
 
----
+select * from stg_order_products limit 5;
 
-### mart_product_performance
+select * from dim_products limit 5;
 
-Product-level reorder loyalty, reach, and cart position. Feeds Dashboard 2 — What Customers Are Buying.
-
-```sql
-CREATE OR REPLACE TABLE mart_product_performance AS
+#this will help analyze which products drive the most volume and loyalty
+CREATE TABLE mart_product_performance AS
 SELECT
-    p.product_id,
-    p.product_name,
-    p.department_name,
-    p.aisle_name,
-    p.is_organic,
-    COUNT(DISTINCT fi.order_id)                              AS total_orders,
-    COUNT(DISTINCT fi.user_id)                               AS unique_buyers,
-    SUM(fi.reordered)                                        AS reorder_count,
-    ROUND(100.0 * SUM(fi.reordered)
-        / NULLIF(COUNT(fi.order_id), 0), 2)                 AS reorder_rate_pct,
-    ROUND(AVG(fi.add_to_cart_order), 2)                     AS avg_cart_position,
-    RANK() OVER (ORDER BY COUNT(DISTINCT fi.order_id) DESC)  AS popularity_rank,
-    RANK() OVER (ORDER BY SUM(fi.reordered) DESC)           AS reorder_rank
-FROM fct_order_items fi
-JOIN dim_products p ON fi.product_id = p.product_id
-GROUP BY 1,2,3,4,5;
-```
+    dp.product_id,
+    dp.product_name,
+    dp.aisle,
+    dp.department,
+    dp.is_organic,
+    COUNT(op.order_id)                          AS total_orders,
+    SUM(op.reordered)                           AS total_reorders,
+    ROUND(AVG(op.reordered), 3)                 AS reorder_rate,
+    ROUND(AVG(op.add_to_cart_order), 1)         AS avg_cart_position
+FROM stg_order_products op
+JOIN dim_products dp 
+	ON op.product_id = dp.product_id
+GROUP BY
+    dp.product_id,
+    dp.product_name,
+    dp.aisle,
+    dp.department,
+    dp.is_organic;
+  
+  #49,677
+  select count(*) from mart_product_performance;
+  
+   select * from mart_product_performance limit 10;
 
----
 
-### mart_timing_analysis
+#this table will help analyze user segmentation by shopping behavior
 
-Hour × day aggregation for peak demand analysis. Feeds the heatmap, hourly line chart, and time-of-day breakdowns in Dashboard 1 — When Customers Shop.
+select * from dim_users limit 5;
 
-```sql
-CREATE OR REPLACE TABLE mart_timing_analysis AS
-SELECT
-    order_day_name,
-    order_dow,
-    order_hour_of_day,
-    time_of_day_bucket,
-    reorder_cycle_bucket,
-    COUNT(order_id)                        AS order_count,
-    COUNT(DISTINCT user_id)                AS unique_shoppers,
-    ROUND(AVG(basket_size), 2)             AS avg_basket_size,
-    ROUND(AVG(reorder_pct), 2)             AS avg_reorder_pct,
-    SUM(basket_size)                       AS total_items_ordered
-FROM fct_orders
-GROUP BY 1,2,3,4,5
-ORDER BY order_dow, order_hour_of_day;
-```
-
----
-
-### mart_user_rfm
-
-User-level RFM (Recency × Frequency × Monetary) scoring using NTILE quintiles. One row per user with their score and named segment. Feeds Dashboard 3 — Shopper Loyalty.
-
-```sql
-CREATE OR REPLACE TABLE mart_user_rfm AS
-WITH rfm_raw AS (
+CREATE TABLE mart_user_rfm AS
+WITH rfm_scores AS (
     SELECT
         user_id,
-        MAX(order_number)        AS recency_score_raw,
-        COUNT(DISTINCT order_id) AS frequency,
-        AVG(basket_size)         AS monetary_proxy
-    FROM fct_orders
-    GROUP BY user_id
-),
-rfm_scored AS (
-    SELECT
-        user_id,
-        frequency,
-        ROUND(monetary_proxy, 2)                            AS avg_basket_size,
-        NTILE(5) OVER (ORDER BY recency_score_raw DESC)     AS r_score,
-        NTILE(5) OVER (ORDER BY frequency ASC)              AS f_score,
-        NTILE(5) OVER (ORDER BY monetary_proxy ASC)         AS m_score
-    FROM rfm_raw
+        total_orders,
+        avg_days_between_orders,
+        total_items_purchased,
+        avg_basket_size,
+        reorder_rate,
+        favorite_order_day,
+        favorite_time_of_day,
+        NTILE(4) OVER (ORDER BY total_orders DESC)              AS frequency_score,
+        NTILE(4) OVER (ORDER BY avg_days_between_orders ASC)    AS recency_score,
+        NTILE(4) OVER (ORDER BY total_items_purchased DESC)     AS volume_score
+    FROM dim_users
 )
 SELECT
     user_id,
-    frequency,
+    total_orders,
+    avg_days_between_orders,
+    total_items_purchased,
     avg_basket_size,
-    r_score,
-    f_score,
-    m_score,
-    r_score + f_score + m_score AS rfm_total,
+    reorder_rate,
+    favorite_order_day,
+    favorite_time_of_day,
+    frequency_score,
+    recency_score,
+    volume_score,
     CASE
-        WHEN r_score >= 4 AND f_score >= 4 THEN 'Champions'
-        WHEN r_score >= 4 AND f_score >= 2 THEN 'Loyal Customers'
-        WHEN r_score >= 3 AND f_score >= 1 THEN 'Potential Loyalists'
-        WHEN r_score >= 4 AND f_score = 1  THEN 'Recent Customers'
-        WHEN r_score <= 2 AND f_score >= 4 THEN 'At Risk'
-        WHEN r_score <= 2 AND f_score >= 2 THEN 'Need Attention'
-        WHEN r_score = 1  AND f_score = 1  THEN 'Lost'
-        ELSE 'Hibernating'
+        WHEN frequency_score = 1 AND recency_score = 1  THEN 'Champion'
+        WHEN frequency_score = 1 AND recency_score = 2  THEN 'Loyal Customer'
+        WHEN frequency_score <= 2 AND recency_score <= 2 THEN 'Potential Loyalist'
+        WHEN frequency_score >= 3 AND recency_score = 1 THEN 'New Customer'
+        WHEN frequency_score >= 3 AND recency_score >= 3 THEN 'At Risk'
+        ELSE                                                  'Occasional Shopper'
     END AS rfm_segment
-FROM rfm_scored;
+FROM rfm_scores;
+
+select * from mart_user_rfm limit 10;
+
+#206,209
+select count(*) from mart_user_rfm;
+
+
+#this table will help analyze when people shop
+select * from fct_orders limit 10;
+
+CREATE TABLE mart_timing_analysis AS
+SELECT
+    order_day_name,
+    order_dow,
+    time_of_day_bucket,
+    order_hour_of_day,
+    COUNT(*)                        AS total_orders,
+    ROUND(AVG(basket_size), 2)      AS avg_basket_size,
+    ROUND(AVG(reorder_rate), 3)     AS avg_reorder_rate,
+    SUM(is_first_order)             AS first_orders
+FROM fct_orders
+GROUP BY
+    order_day_name,
+    order_dow,
+    time_of_day_bucket,
+    order_hour_of_day;
+
+select * from mart_timing_analysis limit 10;
+
+#168
+select count(*) from mart_timing_analysis
+
 ```
 
 
