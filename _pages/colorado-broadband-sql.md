@@ -15,6 +15,10 @@ Source tables: `fcc_co_fiber`, `fcc_co_cable`, `telco_churn`.
 ```sql
 USE fiber_analytics;
 
+select * from fcc_co_fiber limit 10;
+
+select * from fcc_co_cable limit 10;
+
 SELECT
     CASE technology
         WHEN 50 THEN 'Fiber (FTTP)'
@@ -179,8 +183,10 @@ FROM (
         UNION
         SELECT location_id, block_geoid FROM fcc_co_cable
     ) AS a
-    LEFT JOIN (SELECT DISTINCT location_id FROM fcc_co_fiber) AS f ON a.location_id = f.location_id
-    LEFT JOIN (SELECT DISTINCT location_id FROM fcc_co_cable) AS c ON a.location_id = c.location_id
+    LEFT JOIN (SELECT DISTINCT location_id FROM fcc_co_fiber) AS f
+        ON a.location_id = f.location_id
+    LEFT JOIN (SELECT DISTINCT location_id FROM fcc_co_cable) AS c
+        ON a.location_id = c.location_id
 ) AS competition
 GROUP BY county_fips
 ORDER BY pct_cable_only DESC;
