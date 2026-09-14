@@ -1,7 +1,9 @@
 ---
+layout: page
+title: "Telecom Component Audit Framework"
+permalink: /telecom-component-audit-framework/
+---
 # Telecom Component Audit Framework
-
-
 ---
 ## Overview
 
