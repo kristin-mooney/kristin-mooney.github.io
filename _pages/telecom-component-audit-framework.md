@@ -52,36 +52,52 @@ The solution combines SQL Server audit logic with Power BI reporting to provide 
 ---
 
 ## Audit Framework Architecture
-The audit framework validates the movement of component records through multiple interconnected systems.
-Example process flow:
 ```text
 Component Inventory
 │
 ▼
-System 1 → System 2 Audit
+┌─────────────────┐
+│ System 1 → 2 │
+│ Audit Framework │
+└─────────────────┘
 │
 ▼
-System 1 → System 3 Audit
+┌─────────────────┐
+│ System 1 → 3 │
+│ Audit Framework │
+└─────────────────┘
 │
 ▼
-Combined Audit Engine
-│
-├─ Identify Failures
-├─ Determine Root Cause
-├─ Assess Risk
-├─ Evaluate Billing Impact
-└─ Match Reject Activity
+┌─────────────────┐
+│ Combined Audit │
+│ Results Engine │
+└─────────────────┘
 │
 ▼
-Risk Prioritization Framework
+┌─────────────────┐
+│ Root Cause │
+│ Classification │
+└─────────────────┘
 │
 ▼
-Power BI Executive Dashboard
+┌─────────────────┐
+│ Billing Impact │
+│ Assessment │
+└─────────────────┘
 │
 ▼
-Operational Remediation
-```
+┌─────────────────┐
+│ Risk Priority │
+│ Assignment │
+└─────────────────┘
+│
+▼
+┌─────────────────┐
+│ Power BI │
+│ Dashboards │
+└─────────────────┘
 
+```
 At each stage, the audit framework validates successful component creation and identifies reconciliation failures.
 
 ---
