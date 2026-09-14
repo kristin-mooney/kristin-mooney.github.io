@@ -6,8 +6,6 @@ title: "Welcome to My Portfolio"
 Hi, I'm **Kristin Mooney** — a Senior Data Analyst specializing in SQL, Tableau, and Power BI. I build end-to-end analytics projects that turn raw data into clear, actionable insights.
 
 ---
-
-Markdown
 ## Featured Project
 <div style="border: 2px solid #0366d6; border-radius: 8px; padding: 32px; margin-bottom: 32px; background-color: #f8fbff;">
 <h2 style="margin-top: 0;">🚀 Telecom Component Audit Framework</h2>
