@@ -1,3 +1,4 @@
+```sql
 USE [Audit]
 GO
 /****** Object:  StoredProcedure [aud].[sp_component_audit_details_and_summary_tables]    Script Date: 9/14/2026 9:51:50 AM ******/
