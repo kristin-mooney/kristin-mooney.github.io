@@ -137,24 +137,57 @@ The audit framework was built using SQL Server stored procedures that automate r
  
 ### Example Reconciliation Logic
 ```sql
-SELECT
-s.component_id,
-d.component_id
-FROM source_components s
-LEFT JOIN downstream_components d
-ON s.component_id = d.component_id
-WHERE d.component_id IS NULL
-```
-### Example Failure Classification
-```sql
+SELECT DISTINCT
+component_id,
+order_id,
 CASE
-WHEN system2_component IS NULL
-THEN 'Middleware Failure'
-WHEN system3_component IS NULL
-THEN 'Provisioning Failure'
+WHEN system2.audit_result = 'FAIL'
+OR system3.audit_result = 'FAIL'
+THEN 'FAIL'
 ELSE 'PASS'
-END
+END AS audit_result
+FROM source_components;
 ```
+### Root Cause Classification
+```sql
+SELECT
+audit_result,
+issue,
+risk,
+root_cause,
+recommended_solution
+FROM reference.component_issue_classification;
+```
+### Risk Assessment
+```sql
+UPDATE audit_results
+SET assessment =
+CASE
+WHEN incorrect_billing > 0
+THEN 'HIGH RISK'
+WHEN reject_revenue > 0
+THEN 'MEDIUM RISK'
+WHEN audit_result = 'FAIL'
+THEN 'LOW RISK'
+ELSE 'NO RISK'
+END;
+```
+### PowerBI Summary Dataset
+```sql
+INSERT INTO component_audit_summary
+SELECT
+audit_result,
+issue,
+root_cause,
+SUM(incorrect_billing),
+COUNT(*) AS component_count
+FROM component_audit_results
+GROUP BY
+audit_result,
+issue,
+root_cause;
+```
+``
 > Repository SQL files contain simplified examples. Proprietary business logic and production code have been omitted to protect confidential company information.
 ---
 ## Key Skills Demonstrated
