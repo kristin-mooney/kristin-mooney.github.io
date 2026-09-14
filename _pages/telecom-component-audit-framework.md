@@ -124,7 +124,7 @@ Supports operational teams in identifying systemic failures and determining corr
 
 ---
 
- ## SQL Audit Engine
+## SQL Audit Engine
 The audit framework was built using SQL Server stored procedures that automate reconciliation and classification processes.
 
 ### Core Functions
