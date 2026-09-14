@@ -237,7 +237,7 @@ audit_result,
 issue,
 root_cause;
 ```
-``
+
 > Repository SQL files contain simplified examples. Proprietary business logic and production code have been omitted to protect confidential company information.
 ---
 ## Key Skills Demonstrated
