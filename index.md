@@ -3,7 +3,9 @@ layout: page
 title: "Welcome to My Portfolio"
 ---
 
-Hi, I'm **Kristin Mooney** — a Senior Data Analyst specializing in SQL, Tableau, and Power BI. I build end-to-end analytics projects that turn raw data into clear, actionable insights.
+Hi, I'm **Kristin Mooney** — a Senior Data Analyst specializing in SQL, Power BI, Tableau, data quality auditing, and operational analytics.
+
+I build end-to-end analytical solutions that transform complex data into actionable business decisions. My work combines data engineering, audit design, root cause analysis, and executive reporting to help organizations identify problems, quantify impact, and prioritize action.
 
 ---
 ## Featured Project
