@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Telecom Component Audit Framework"
-permalink: /telecom-component-audit-framework/
+permalink: /telecom-component-audit-framework.md/
 ---
 # Telecom Component Audit Framework
 ---
