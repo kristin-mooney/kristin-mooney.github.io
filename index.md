@@ -7,7 +7,28 @@ Hi, I'm **Kristin Mooney** — a Senior Data Analyst specializing in SQL, Tablea
 
 ---
 
-## Projects
+Markdown
+## Featured Project
+<div style="border: 2px solid #0366d6; border-radius: 8px; padding: 32px; margin-bottom: 32px; background-color: #f8fbff;">
+<h2 style="margin-top: 0;">🚀 Telecom Component Audit Framework</h2>
+<p style="color: #666; font-style: italic;">
+Root Cause Analysis • Risk Prioritization • Power BI • SQL Server
+</p>
+
+<p>
+Designed and implemented an end-to-end telecommunications audit framework that reconciles component records across multiple downstream systems, identifies root causes, evaluates billing accuracy, quantifies customer and revenue impact, and prioritizes remediation efforts through risk-based analytics.
+</p>
+<p>
+The solution combines cross-system reconciliation, billing validation, reject analysis, risk assessment, and executive reporting into a scalable monitoring framework used to identify high-impact operational issues.
+</p>
+<p><strong>Tools:</strong> SQL Server · Stored Procedures · Power BI · Data Reconciliation · Root Cause Analysis</p>
+<a href="/telecom-component-mework/
+View Project →
+</a>
+</div>
+---
+
+## Additional Projects
 
 <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px;">
 
