@@ -100,7 +100,7 @@ Provides an executive-level view of component audit performance across the ecosy
  
 ---
  ## Root Cause Analysis Dashboard
-![root-cause-dashboard.png](/root_cause-dashboard.png)
+![root-cause-dashboard.png](/root-cause-dashboard.png)
 
 
 ### Dashboard Purpose
