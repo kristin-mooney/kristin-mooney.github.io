@@ -23,6 +23,7 @@ The solution combines cross-system reconciliation, billing validation, reject an
 </p>
 <p><strong>Tools:</strong> SQL Server · Stored Procedures · Power BI · Data Reconciliation · Root Cause Analysis</p>
 <a href="/telecom-component-audit-framework/" style="display: inline-block; margin-right: 8px; margin-bottom: 8px; padding: 8px 16px; background: #0366d6; color: white; border-radius: 4px; text-decoration: none; font-size: 14px;">View Project →</a>
+
 ---
 
 ## Additional Projects
