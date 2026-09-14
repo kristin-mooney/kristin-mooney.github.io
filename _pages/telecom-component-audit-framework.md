@@ -140,7 +140,7 @@ Provides an executive-level view of component audit performance across the ecosy
 - Identifies high-risk operational issues
 - Supports prioritization of remediation efforts
 
- ### Sample Metrics
+### Sample Metrics
 - Component Volume Audited
 - Failed Component Count
 - Customers Impacted
@@ -149,7 +149,7 @@ Provides an executive-level view of component audit performance across the ecosy
 - Risk Distribution
  
 ---
- ## Root Cause Analysis Dashboard
+## Root Cause Analysis Dashboard
 ![root-cause-dashboard.png](/root-cause-dashboard.png)
 
 
