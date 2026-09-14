@@ -8,7 +8,7 @@ Hi, I'm **Kristin Mooney** — a Senior Data Analyst specializing in SQL, Power 
 I build end-to-end analytical solutions that transform complex data into actionable business decisions. My work combines data engineering, audit design, root cause analysis, and executive reporting to help organizations identify problems, quantify impact, and prioritize action.
 
 ---
-## Featured Project
+## Featured Work
 <div style="border: 2px solid #0366d6; border-radius: 8px; padding: 32px; margin-bottom: 32px; background-color: #f8fbff;">
 <h2 style="margin-top: 0;">🚀 Telecom Component Audit Framework</h2>
 <p style="color: #666; font-style: italic;">
