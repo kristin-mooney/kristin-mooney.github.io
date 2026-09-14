@@ -1,10 +1,11 @@
 ---
 layout: page
 title: "Telecom Component Audit Framework"
-permalink: /telecom-component-audit-framework.md/
+permalink: /telecom-component-audit-framework/
 ---
+ 
 # Telecom Component Audit Framework
----
+
 ## Overview
 
 This project demonstrates the design and implementation of an automated telecommunications component audit framework built using SSMS and Power BI.
