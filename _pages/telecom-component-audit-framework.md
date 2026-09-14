@@ -53,52 +53,76 @@ The solution combines SQL Server audit logic with Power BI reporting to provide 
 
 ## Audit Framework Architecture
 ```text
-Component Inventory
+┌─────────────────────────────┐
+│ Component Inventory │
+│ Source System Records │
+└─────────────┬───────────────┘
 │
 ▼
-┌─────────────────┐
-│ System 1 → 2 │
-│ Audit Framework │
-└─────────────────┘
+┌─────────────────────────────┐
+│ Reconciliation Layer │
+│ │
+│ System 1 → System 2 Audit │
+│ System 1 → System 3 Audit │
+└─────────────┬───────────────┘
 │
 ▼
-┌─────────────────┐
-│ System 1 → 3 │
-│ Audit Framework │
-└─────────────────┘
+┌─────────────────────────────┐
+│ Combined Audit Engine │
+│ │
+│ Pass / Fail Determination │
+│ Failure Scenarios │
+└─────────────┬───────────────┘
 │
 ▼
-┌─────────────────┐
-│ Combined Audit │
-│ Results Engine │
-└─────────────────┘
-│
-▼
-┌─────────────────┐
+┌─────────────────────────────┐
+│ Root Cause Classification │
+│ │
+│ Issue │
 │ Root Cause │
-│ Classification │
-└─────────────────┘
+│ Point of Failure │
+│ Solution │
+└─────────────┬───────────────┘
 │
 ▼
-┌─────────────────┐
-│ Billing Impact │
-│ Assessment │
-└─────────────────┘
+┌─────────────────────────────┐
+│ Impact Assessment │
+│ │
+│ Incorrect Billing │
+│ Revenue Exposure │
+│ Reject Analysis │
+│ Customer Impact │
+└─────────────┬───────────────┘
 │
 ▼
-┌─────────────────┐
-│ Risk Priority │
-│ Assignment │
-└─────────────────┘
+┌─────────────────────────────┐
+│ Risk Prioritization │
+│ │
+│ High Risk │
+│ Medium Risk │
+│ Low Risk │
+│ No Risk │
+└─────────────┬───────────────┘
 │
 ▼
-┌─────────────────┐
-│ Power BI │
-│ Dashboards │
-└─────────────────┘
+┌─────────────────────────────┐
+│ Power BI Reporting │
+│ │
+│ Executive Dashboard │
+│ Root Cause Dashboard │
+└─────────────┬───────────────┘
+│
+▼
+┌─────────────────────────────┐
+│ Operational Remediation │
+│ │
+│ Ticket Creation │
+│ Issue Resolution │
+│ Process Improvement │
+└─────────────────────────────┘
 
 ```
-At each stage, the audit framework validates successful component creation and identifies reconciliation failures.
+This solution transformed a previously manual audit process into a scalable monitoring framework that provides visibility into system integrity, billing accuracy, customer impact, and root-cause trends.
 
 ---
 ## Executive Audit Dashboard
