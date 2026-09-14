@@ -20,7 +20,7 @@ Designed and implemented an end-to-end telecommunications audit framework that r
 The solution combines cross-system reconciliation, billing validation, reject analysis, risk assessment, and executive reporting into a scalable monitoring framework used to identify high-impact operational issues.
 </p>
 <p><strong>Tools:</strong> SQL Server · Stored Procedures · Power BI · Data Reconciliation · Root Cause Analysis</p>
-<a href="/telecom-component-mework/
+<a href="/telecom-component-audit-framework/
 View Project →
 </a>
 </div>
