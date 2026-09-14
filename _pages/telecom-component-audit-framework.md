@@ -76,7 +76,7 @@ At each stage, the audit framework validates successful component creation and i
 
 ---
 ## Executive Audit Dashboard
-![audit-summary-dashboard.png
+![audit-summary-dashboard.png](/audit-summary-dashboard.png)
 
 
 ### Dashboard Purpose
@@ -100,7 +100,7 @@ Provides an executive-level view of component audit performance across the ecosy
  
 ---
  ## Root Cause Analysis Dashboard
-![root-cause-dashboard.png
+![root-cause-dashboard.png](/root_cause-dashboard.png)
 
 
 ### Dashboard Purpose
