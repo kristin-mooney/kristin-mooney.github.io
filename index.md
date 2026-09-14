@@ -22,7 +22,8 @@ Designed and implemented an end-to-end telecommunications audit framework that r
 The solution combines cross-system reconciliation, billing validation, reject analysis, risk assessment, and executive reporting into a scalable monitoring framework used to identify high-impact operational issues.
 </p>
 <p><strong>Tools:</strong> SQL Server · Stored Procedures · Power BI · Data Reconciliation · Root Cause Analysis</p>
-<img width="8646" height="2268" alt="image" src="https://github.com/user-attachments/assets/c14f7aa8-ec87-428a-9bd1-a448c1c2f22e" />(https://kristin-mooney.github.io/telecom-component-audit-framework/)
+<img width="8646" height="2268" alt="image" src="https://github.com/user-attachments/assets/c14f7aa8-ec87-428a-9bd1-a448c1c2f22e" />
+(https://kristin-mooney.github.io/telecom-component-audit-framework/)
 
 
 
