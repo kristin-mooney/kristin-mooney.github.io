@@ -15,3 +15,8 @@ include:
 
 plugins:
   - jekyll-feed
+
+collections:
+pages:
+output: true
+permalink: /:name/
