@@ -48,7 +48,6 @@ Designed and implemented an automated audit framework that:
 - Measures revenue exposure
 - Prioritizes remediation efforts based on business risk
 
-
 The solution combines SQL Server audit logic with Power BI reporting to provide operational visibility and support data-driven decision making.
 
 ---
@@ -94,9 +93,7 @@ Provides an executive-level view of component audit performance across the ecosy
 - Identifies high-risk operational issues
 - Supports prioritization of remediation efforts
 
- 
-
-### Sample Metrics
+ ### Sample Metrics
 - Component Volume Audited
 - Failed Component Count
 - Customers Impacted
