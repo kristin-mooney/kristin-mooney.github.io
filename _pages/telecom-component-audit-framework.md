@@ -8,7 +8,7 @@ permalink: /telecom-component-audit-framework/
 
 ## Overview
 
-This project demonstrates the design and implementation of an automated telecommunications component audit framework built using SSMS and Power BI.
+This project demonstrates the design and implementation of an automated telecommunications component audit framework built using SQL Server and Power BI.
 
 The solution reconciles component orders across multiple downstream systems, identifies failures throughout the order lifecycle, determines root causes, quantifies customer and revenue impact, and prioritizes remediation efforts through automated reporting.
 
@@ -191,14 +191,12 @@ The audit framework was built using SQL Server stored procedures that automate r
 ### Example Reconciliation Logic
 ```sql
 SELECT DISTINCT
-component_id,
-order_id,
-CASE
-WHEN system2.audit_result = 'FAIL'
-OR system3.audit_result = 'FAIL'
-THEN 'FAIL'
-ELSE 'PASS'
-END AS audit_result
+    component,
+    order_id,
+    CASE WHEN system2.audit_results = 'FAIL'
+          OR  system3.audit_results = 'FAIL'
+         THEN 'FAIL' ELSE 'PASS'
+    END AS audit_results
 FROM source_components;
 ```
 ### Root Cause Classification
