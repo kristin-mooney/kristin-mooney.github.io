@@ -1,3 +1,11 @@
+---
+layout: page
+title: "Telecom Component Audit Framework — SQL"
+permalink: /telecom-component-audit-framework-sql/
+---
+
+
+
 NOTE
 This file contains a portfolio/demonstration version of the stored procedure. Proprietary system names, internal field
 references, and confidential company information have been abstracted or removed to protect confidential information.
