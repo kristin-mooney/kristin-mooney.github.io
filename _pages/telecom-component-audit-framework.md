@@ -275,9 +275,16 @@ root_cause;
 
 ---
 ## Business Impact
-Applied to a production dataset of 6.4M+ component records across 10 enterprise customers, this framework identified 84K+ failed components on a single reporting cycle — surfacing $4,080 in rejecting revenue and active incorrect billing that required immediate escalation. The solution reduced root cause investigation from a multi-system manual process to a daily automated report, enabling the operations team to triage by risk tier and route remediation in hours rather than days.
 
-The project showcases a blend of technical engineering, business analysis, risk management, and data visualization skills used to solve operational challenges within a telecommunications environment.
+Applied to a production-scale dataset spanning millions of component records across multiple enterprise customers, this framework identified tens of thousands of failed components in a single reporting cycle — surfacing rejecting revenue and active incorrect billing that required immediate escalation.
+
+The solution reduced root cause investigation from a multi-system manual process to a daily automated report, enabling the operations team to triage by risk tier and route remediation in hours rather than days.
+
+Key outcomes this framework enables:
+
+- **Automated detection** of provisioning and billing failures at scale
+- **Risk-tiered triage** so the highest-impact issues are resolved first
+- **Cross-system reconciliation** that
 
 ---
 ## Future Enhancements
