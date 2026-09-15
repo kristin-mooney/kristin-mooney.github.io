@@ -297,6 +297,20 @@ Key outcomes this framework enables:
 - SLA tracking for ticket-to-resolution time 
   
 ---
+<a href="/telecom-component-audit-framework-sql/"
+   style="display: inline-block;
+          padding: 8px 16px;
+          background: #f6f8fa;
+          color: #0366d6;
+          border: 1px solid #0366d6;
+          border-radius: 4px;
+          text-decoration: none;
+          font-size: 14px;">
+  View Full SQL →
+</a>
+
+
+---
 
 ## Author
 **Kristin Mooney** — Senior Data Analyst | Fiber & Telecommunications
