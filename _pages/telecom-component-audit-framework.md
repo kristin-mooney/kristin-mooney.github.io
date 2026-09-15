@@ -282,8 +282,10 @@ The project showcases a blend of technical engineering, business analysis, risk 
 ---
 ## Future Enhancements
 - Automated alerting for critical failures
+- Trend alerting on issue code spikes
 - Real-time audit validation
-- Expanded risk scoring model
+- Expanded customer-level drill-through 
+- SLA tracking for ticket-to-resolution time 
   
 ---
 
