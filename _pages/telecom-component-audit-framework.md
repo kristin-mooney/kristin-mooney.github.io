@@ -297,7 +297,7 @@ Key outcomes this framework enables:
 - SLA tracking for ticket-to-resolution time 
   
 ---
-<a href="/telecom-component-audit-framework-sql/"
+<a href="/telecom-component-audit-framework-sql.md/"
    style="display: inline-block;
           padding: 8px 16px;
           background: #f6f8fa;
