@@ -1,9 +1,3 @@
-kristin-mooney.github.io/
-├── _pages/
-├── assets/images/
-├── sql/
-│   └── sp_component_audit_details_and_summary_tables.sql  ← add this
-
 
 ```sql
 USE [Audit]
