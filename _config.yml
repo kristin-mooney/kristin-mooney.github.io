@@ -7,16 +7,13 @@ theme: minima
 author: "Kristin Mooney"
 
 header_pages:
+  - _pages/telecom-component-audit-framework.md
   - _pages/colorado-broadband.md
   - _pages/instacart-analytics.md
+  
 
 include:
   - _pages
 
 plugins:
   - jekyll-feed
-
-collections:
-pages:
-output: true
-permalink: /:name/
