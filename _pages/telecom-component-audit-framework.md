@@ -1,40 +1,34 @@
 ---
 layout: page
-title: "Component Order Audit Framework — SQL & Power BI"
-permalink: /component-audit-framework/
+title: "Telecom Component Audit Framework"
+permalink: /telecom-component-audit-framework/
 ---
-
+ 
 # Telecom Component Audit Framework
 
 ## Overview
 
-This project demonstrates the design and implementation of an automated telecommunications component audit framework built using SQL Server and Power BI.
+This project demonstrates the design and implementation of an automated telecommunications component audit framework built using SSMS and Power BI.
 
 The solution reconciles component orders across multiple downstream systems, identifies failures throughout the order lifecycle, determines root causes, quantifies customer and revenue impact, and prioritizes remediation efforts through automated reporting.
 
 The objective was to transform a previously manual audit process into a scalable monitoring solution capable of validating millions of component records across a complex telecommunications ecosystem.
 
 ---
-
 ## Technologies Used
-
-- SQL Server
-- SQL Server Integration Services (SSIS)
+- SQL Server (SSMS)
 - SQL Stored Procedures
-- Power BI
-- Data Reconciliation & Auditing
+- Data Reconciliation
 - Root Cause Analysis
-- Risk Assessment
+- Power BI
+- Data Quality Monitoring
 - Operational Reporting
+- Risk Assessment
 
 ---
-
 ## Business Problem
-
-Telecommunications component orders move through multiple applications, middleware layers, and downstream systems before activation and billing. At scale, even a sub-1% failure rate across millions of component records can result in tens of thousands of affected orders, revenue exposure, and customer impact that is invisible without automated detection.
-
+Telecommunications component orders move through multiple applications, middleware layers, and downstream systems before activation and billing.
 Failures at any point in the process can result in:
-
 - Missing component records
 - Incorrect component creation
 - Customer impact
@@ -45,11 +39,8 @@ Failures at any point in the process can result in:
 Prior to this solution, identifying failures required manual investigation across several systems, making root cause identification both time-consuming and difficult to scale.
 
 ---
-
 ## Solution
-
 Designed and implemented an automated audit framework that:
-
 - Tracks component records throughout the order lifecycle
 - Reconciles source and downstream records
 - Identifies failures and discrepancies
@@ -64,72 +55,246 @@ The solution combines SQL Server audit logic with Power BI reporting to provide 
 ---
 
 ## Audit Framework Architecture
-
 ```text
 ┌─────────────────────────────┐
-│     Component Inventory     │
-│     Source System Records   │
+│ Component Inventory │
+│ Source System Records │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│     Reconciliation Layer    │
-│                             │
-│  System 1 → System 2 Audit  │
-│  System 1 → System 3 Audit  │
+│ Reconciliation Layer │
+│ │
+│ System 1 → System 2 Audit │
+│ System 1 → System 3 Audit │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│    Combined Audit Engine    │
-│                             │
-│  Pass / Fail Determination  │
-│      Failure Scenarios      │
+│ Combined Audit Engine │
+│ │
+│ Pass / Fail Determination │
+│ Failure Scenarios │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│  Root Cause Classification  │
-│                             │
-│           Issue             │
-│         Root Cause          │
-│      Point of Failure       │
-│          Solution           │
+│ Root Cause Classification │
+│ │
+│ Issue │
+│ Root Cause │
+│ Point of Failure │
+│ Solution │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│      Impact Assessment      │
-│                             │
-│     Incorrect Billing       │
-│      Revenue Exposure       │
-│       Reject Analysis       │
-│      Customer Impact        │
+│ Impact Assessment │
+│ │
+│ Incorrect Billing │
+│ Revenue Exposure │
+│ Reject Analysis │
+│ Customer Impact │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│     Risk Prioritization     │
-│                             │
-│          High Risk          │
-│         Medium Risk         │
-│          Low Risk           │
-│          No Risk            │
+│ Risk Prioritization │
+│ │
+│ High Risk │
+│ Medium Risk │
+│ Low Risk │
+│ No Risk │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│      Power BI Reporting     │
-│                             │
-│    Executive Dashboard      │
-│    Root Cause Dashboard     │
+│ Power BI Reporting │
+│ │
+│ Executive Dashboard │
+│ Root Cause Dashboard │
 └─────────────┬───────────────┘
-              │
-              ▼
+│
+▼
 ┌─────────────────────────────┐
-│  Operational Remediation    │
-│                             │
-│      Ticket Creation        │
-│      Issue Resolution       │
-│    Process Improvement      │
+│ Operational Remediation │
+│ │
+│ Ticket Creation │
+│ Issue Resolution │
+│ Process Improvement │
 └─────────────────────────────┘
+
+```
+This solution transformed a previously manual audit process into a scalable monitoring framework that provides visibility into system integrity, billing accuracy, customer impact, and root-cause trends.
+
+---
+## Executive Audit Dashboard
+![audit-summary-dashboard.png](/audit-summary-dashboard.png)
+
+
+### Dashboard Purpose
+Provides an executive-level view of component audit performance across the ecosystem.
+
+### Key Capabilities
+- Measures overall audit pass and fail rates
+- Tracks total components processed
+- Quantifies customer impact
+- Highlights billing discrepancies
+- Identifies high-risk operational issues
+- Supports prioritization of remediation efforts
+
+### Sample Metrics
+- Component Volume Audited
+- Failed Component Count
+- Customers Impacted
+- Revenue Exposure
+- Billing Impact
+- Risk Distribution
+ 
+---
+## Root Cause Analysis Dashboard
+![root-cause-dashboard.png](/root-cause-dashboard.png)
+
+
+### Dashboard Purpose
+Supports operational teams in identifying systemic failures and determining corrective actions.
+
+### Key Capabilities
+- Identifies points of failure
+- Categorizes issue sources
+- Maps reconciliation paths
+- Quantifies issue volume by system
+- Supports root cause investigations
+- Prioritizes remediation opportunities
+
+### Analysis Areas
+- System Failures
+- Process Breakdowns
+- Data Quality Issues
+- Handoff Failures
+- Human Error
+- Middleware Issues
+
+---
+
+## SQL Audit Engine
+The audit framework was built using SQL Server stored procedures that automate reconciliation and classification processes.
+
+### Core Functions
+- Component lineage tracking
+- Cross-system reconciliation
+- Failure identification
+- Root cause classification
+- Risk scoring
+- Reporting dataset generation
+ 
+### Example Reconciliation Logic
+```sql
+SELECT DISTINCT
+component_id,
+order_id,
+CASE
+WHEN system2.audit_result = 'FAIL'
+OR system3.audit_result = 'FAIL'
+THEN 'FAIL'
+ELSE 'PASS'
+END AS audit_result
+FROM source_components;
+```
+### Root Cause Classification
+```sql
+SELECT
+audit_result,
+issue,
+risk,
+root_cause,
+recommended_solution
+FROM reference.component_issue_classification;
+```
+### Risk Assessment
+```sql
+UPDATE audit_results
+SET assessment =
+CASE
+WHEN incorrect_billing > 0
+THEN 'HIGH RISK'
+WHEN reject_revenue > 0
+THEN 'MEDIUM RISK'
+WHEN audit_result = 'FAIL'
+THEN 'LOW RISK'
+ELSE 'NO RISK'
+END;
+```
+### PowerBI Summary Dataset
+```sql
+INSERT INTO component_audit_summary
+SELECT
+audit_result,
+issue,
+root_cause,
+SUM(incorrect_billing),
+COUNT(*) AS component_count
+FROM component_audit_results
+GROUP BY
+audit_result,
+issue,
+root_cause;
+```
+
+> Repository SQL files contain simplified examples. Proprietary business logic and production code have been omitted to protect confidential company information.
+---
+## Key Skills Demonstrated
+
+### Data Engineering
+- Audit framework design
+- Data reconciliation
+- ETL validation
+- Large-scale record auditing
+
+### SQL Development
+- Stored procedure development
+- Query optimization
+- Complex joins
+- Exception reporting
+
+### Business Analysis
+- Root cause analysis
+- Issue prioritization
+- Process improvement
+- Risk assessment
+
+### Power BI Development
+- Executive dashboard design
+- KPI development
+- Interactive reporting
+- Business storytelling
+
+### Telecommunications Knowledge
+- Component lifecycle management
+- Order processing workflows
+- System integration analysis
+- Operational monitoring
+
+---
+## Business Impact
+This framework demonstrates the ability to:
+- Design scalable audit solutions
+- Automate reconciliation processes
+- Identify systemic issues across multiple applications
+- Prioritize remediation efforts using data
+- Transform complex technical findings into actionable business insights
+
+The project showcases a blend of technical engineering, business analysis, risk management, and data visualization skills used to solve operational challenges within a telecommunications environment.
+
+---
+## Future Enhancements
+- Automated alerting for critical failures
+- Real-time audit validation
+- Expanded risk scoring model
+  
+---
+
+## Author
+Kristin Mooney
+
+Developed as part of an operational audit and reconciliation initiative focused on improving data quality, reducing customer impact, and increasing visibility across a telecommunications component ecosystem.
