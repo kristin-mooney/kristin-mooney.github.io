@@ -16,18 +16,18 @@ The objective was to transform a previously manual audit process into a scalable
 
 ---
 ## Technologies Used
-- SQL Server (SSMS)
+- SQL Server
+- SQL Server Integration Services (SSIS)
 - SQL Stored Procedures
-- Data Reconciliation
-- Root Cause Analysis
 - Power BI
-- Data Quality Monitoring
-- Operational Reporting
+- Data Reconciliation & Auditing
+- Root Cause Analysis
 - Risk Assessment
+- Operational Reporting
 
 ---
 ## Business Problem
-Telecommunications component orders move through multiple applications, middleware layers, and downstream systems before activation and billing.
+Telecommunications component orders move through multiple applications, middleware layers, and downstream systems before activation and billing. At scale, even a sub-1% failure rate across millions of component records can result in tens of thousands of affected orders, revenue exposure, and customer impact that is invisible without automated detection.
 Failures at any point in the process can result in:
 - Missing component records
 - Incorrect component creation
@@ -275,12 +275,7 @@ root_cause;
 
 ---
 ## Business Impact
-This framework demonstrates the ability to:
-- Design scalable audit solutions
-- Automate reconciliation processes
-- Identify systemic issues across multiple applications
-- Prioritize remediation efforts using data
-- Transform complex technical findings into actionable business insights
+Applied to a production dataset of 6.4M+ component records across 10 enterprise customers, this framework identified 84K+ failed components on a single reporting cycle — surfacing $4,080 in rejecting revenue and active incorrect billing that required immediate escalation. The solution reduced root cause investigation from a multi-system manual process to a daily automated report, enabling the operations team to triage by risk tier and route remediation in hours rather than days.
 
 The project showcases a blend of technical engineering, business analysis, risk management, and data visualization skills used to solve operational challenges within a telecommunications environment.
 
@@ -293,6 +288,7 @@ The project showcases a blend of technical engineering, business analysis, risk 
 ---
 
 ## Author
-Kristin Mooney
+**Kristin Mooney** — Senior Data Analyst | Fiber & Telecommunications
 
-Developed as part of an operational audit and reconciliation initiative focused on improving data quality, reducing customer impact, and increasing visibility across a telecommunications component ecosystem.
+[🔗 Portfolio](https://kristin-mooney.github.io) · [💼 LinkedIn](https://linkedin.com/in/kristinmooney) · [📂 GitHub](https://github.com/kristin-mooney)
+
