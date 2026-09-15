@@ -306,7 +306,7 @@ Key outcomes this framework enables:
           border-radius: 4px;
           text-decoration: none;
           font-size: 14px;">
-  View Full SQL →
+  View Full SQL Stored Procedure →
 </a>
 
 
