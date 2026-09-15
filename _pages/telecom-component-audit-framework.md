@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Telecom Component Audit Framework"
+title: "Component Order Audit Framework — SQL & Power BI"
 permalink: /telecom-component-audit-framework/
 ---
  
@@ -223,7 +223,7 @@ THEN 'LOW RISK'
 ELSE 'NO RISK'
 END;
 ```
-### PowerBI Summary Dataset
+### Power BI Summary Dataset
 ```sql
 INSERT INTO component_audit_summary
 SELECT
