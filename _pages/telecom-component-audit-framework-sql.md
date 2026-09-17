@@ -210,7 +210,7 @@ BEGIN TRY
         GROUP BY component, account, invoice_dt
     ) b ON a.component = b.component AND a.account = b.account
     WHERE audit_results        = 'PASS'
-      AND a.component_status   = 'ACTIVE'    -- BUG FIX 1: was a.component = 'ACTIVE'
+      AND a.component_status   = 'ACTIVE'    
       AND a.order_dt           < b.invoice_dt
 
     -- MRC billed correctly
@@ -237,9 +237,9 @@ BEGIN TRY
         WHERE charge_type = 'NRC' AND rev > 0
         GROUP BY component, account, invoice_dt
     ) b ON a.component = b.component
-       AND a.account   = b.account          -- BUG FIX 3: was b.acct_no (proprietary field)
+       AND a.account   = b.account          
     WHERE audit_results        = 'PASS'
-      AND a.component_status   = 'ACTIVE'   -- BUG FIX 2: was a.component-status (hyphen)
+      AND a.component_status   = 'ACTIVE'   
       AND a.order_dt           < b.invoice_dt
 
     INSERT INTO ctl.sp_log (sp_name, step, description, complete_date, ssis_run_id)
@@ -293,13 +293,13 @@ BEGIN TRY
         GROUP BY component, account, invoice_dt
     ) b ON a.component = b.component
     WHERE component_status = 'DISCONNECT'
-      AND a.account = b.account             -- BUG FIX 4: was b.acct_no (proprietary field)
+      AND a.account = b.account             
       AND a.order_dt < b.invoice_dt
 
     -- NRC incorrectly billed -- Pattern A: ACTIVE, wrong account
     UPDATE a
     SET nrcs_billing_incorrectly = rev
-      , wrong_account_billed     = b.account  -- BUG FIX 5: was b.Aaccount (casing typo)
+      , wrong_account_billed     = b.account  
     FROM tmp.component_audit_results a
     INNER JOIN (
         SELECT DISTINCT component, account, invoice_dt, SUM(rev) rev
@@ -354,11 +354,11 @@ BEGIN TRY
         SUM(sum_e_est_post_discount_amount)     AS rev,
         MIN(CAST(trans_dt AS DATE))                first_trans_dt,
         MAX(CAST(trans_dt AS DATE))                last_trans_dt,
-        @run_id                                 -- BUG FIX 6: was @ssis_run_id (undeclared)
+        @run_id                                 
     FROM rej.system3_reject_summary r WITH (NOLOCK)
     INNER JOIN (
         SELECT DISTINCT component, customer, ban, account, issue, ticket_status
-        FROM tmp.component_audit_results        -- BUG FIX 8: was tmp.components_audit_results
+        FROM tmp.component_audit_results        
         WHERE audit_results = 'FAIL'
     ) h ON r.external_id = h.component
     WHERE r.source = 'System3'
@@ -407,10 +407,10 @@ BEGIN TRY
     SELECT DISTINCT
         CAST(GETDATE() AS DATE)        report_date,
         carrier, component, customer, ban, account, issue, ticket_status, ec,
-        SUM(mou) * 0.005            AS est_rev,  -- BUG FIX 7: removed stray leading comma
+        SUM(mou) * 0.005            AS est_rev,  
         MIN(fcd)                       fcd,
         MAX(lcd)                       lcd,
-        @run_id                                  -- BUG FIX 9: was @ssis_run_id (undeclared)
+        @run_id                                  
     FROM tmp.component_system2_reject
     GROUP BY carrier, component, customer, ban, account, issue, ticket_status, ec
 
@@ -492,12 +492,12 @@ BEGIN TRY
         audit_results,
         system2_scenario,
         system3_scenario,
-        component,               -- BUG FIX 10: was 'compnent' (typo)
+        component,               
         order_id,
         component_status,
         customer, ban, account, product, order_dt,
         issue, risk, root_cause, solution, point_of_failure,
-        ''                    AS assessment,  -- BUG FIX 11: was 'assesement' (typo)
+        ''                    AS assessment,  
         ticket_status,
         system2_rejects, system3_rejects,
         usage_billing_correctly, mrcs_billing_correctly, nrcs_billing_correctly,
@@ -565,7 +565,7 @@ BEGIN TRY
             + nrcs_billing_correctly)                                    AS correct_billing,
         COUNT(*)                                                         AS cnt,
         MIN(component)                                                   AS example,
-        @run_id                 -- BUG FIX 12: was @ssis_run_id (undeclared variable)
+        @run_id                 
     FROM aud.component_audit_results
     GROUP BY
         audit_results, component_status, customer, ban, account, product, order_dt,
