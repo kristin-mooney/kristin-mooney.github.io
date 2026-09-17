@@ -313,7 +313,7 @@ Key outcomes this framework enables:
 ---
 
 ## Author
-**Kristin Mooney** — Senior Data Analyst | Fiber & Telecommunications
+**Kristin Mooney** — Senior Data Analyst | Telecommunications
 
 [🔗 Portfolio](https://kristin-mooney.github.io) · [💼 LinkedIn](https://linkedin.com/in/kristinmooney) · [📂 GitHub](https://github.com/kristin-mooney)
 
