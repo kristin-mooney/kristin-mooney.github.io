@@ -73,4 +73,4 @@ I build end-to-end analytical solutions that transform complex data into actiona
 
 ---
 
-*More projects coming soon.*
+*More projects coming soon!*
