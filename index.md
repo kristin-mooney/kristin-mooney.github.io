@@ -12,7 +12,7 @@ I build end-to-end analytical solutions that transform complex data into actiona
 ## Featured Work
 
 <div style="border: 2px solid #0366d6; border-radius: 8px; padding: 32px; margin-bottom: 32px; background-color: #f8fbff;">
-  <h2 style="margin-top: 0;">🚀 Telecom Component Audit Framework</h2>
+  <h2 style="margin-top: 0;"> Telecom Component Audit Framework</h2>
   <p style="color: #666; font-style: italic;">
     Root Cause Analysis • Risk Prioritization • Power BI • SQL Server
   </p>
@@ -46,7 +46,7 @@ I build end-to-end analytical solutions that transform complex data into actiona
 <div style="display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px;">
 
   <div style="flex: 1; min-width: 280px; border: 1px solid #e1e4e8; border-radius: 8px; padding: 24px;">
-    <h3 style="margin-top: 0;">🌐 Colorado's Broadband Opportunity</h3>
+    <h3 style="margin-top: 0;"> Colorado's Broadband Opportunity</h3>
     <p style="color: #666; font-style: italic; margin-top: -8px;">Landscape, Competition & Expansion Strategy</p>
     <p>End-to-end analysis of Colorado's broadband market using FCC data across 2.7M locations. Maps Cable vs. Fiber competition, identifies expansion targets, and models churn risk.</p>
     <p><strong>Tools:</strong> SQL · Tableau</p>
@@ -57,7 +57,7 @@ I build end-to-end analytical solutions that transform complex data into actiona
   </div>
 
   <div style="flex: 1; min-width: 280px; border: 1px solid #e1e4e8; border-radius: 8px; padding: 24px;">
-    <h3 style="margin-top: 0;">🛒 Instacart Shopper Behavior Analysis</h3>
+    <h3 style="margin-top: 0;"> Instacart Shopper Behavior Analysis</h3>
     <p style="color: #666; font-style: italic; margin-top: -8px;">When, What & Who</p>
     <p>Analysis of 3.4M grocery orders across 200K+ customers. Uncovers peak demand windows, high-loyalty product categories, and customer segments by purchase frequency.</p>
     <p><strong>Tools:</strong> dbt · SQL · Tableau</p>
@@ -68,7 +68,7 @@ I build end-to-end analytical solutions that transform complex data into actiona
 
 </div>
   <div style="flex: 1; min-width: 280px; border: 1px solid #e1e4e8; border-radius: 8px; padding: 24px;">
-    <h3 style="margin-top: 0;">⚽ International Women's Soccer: A Data Story</h3>
+    <h3 style="margin-top: 0;"> International Women's Soccer: A Data Story</h3>
     <p style="color: #666; font-style: italic; margin-top: -8px;">Growth, Competition & Team Performance (1991–2026)</p>
     <p>From 25 nations in 1991 to 200+ in 2025, this three-part Tableau story explores global growth, modern scoring trends, and team KPIs across 6,966 matches. The USA leads with an 80% win rate — but the gap is closing.</p>
     <p><strong>Tools:</strong> Tableau</p>
