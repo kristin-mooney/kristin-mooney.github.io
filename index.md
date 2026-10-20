@@ -67,6 +67,8 @@ I build end-to-end analytical solutions that transform complex data into actiona
     <p>From 25 nations in 1991 to 200+ in 2025, this three-part Tableau story explores global growth, modern scoring trends, and team KPIs across 6,966 matches. The USA leads with an 80% win rate — but the gap is closing.</p>
     <p><strong>Tools:</strong> Tableau</p>
     <a href="https://public.tableau.com/app/profile/kristin.mooney/viz/WomensSoccerAnalysis/InternationalWomensSoccerADataStory19912026" style="display: inline-block; padding: 8px 16px; background: #f6f8fa; color: #0366d6; border: 1px solid #0366d6; border-radius: 4px; text-decoration: none; font-size: 14px;">View Dashboard →</a>
+        <a href="https://github.com/kristin-mooney/women-soccer-analysis" style="display: inline-block; margin-left: 8px; padding: 8px 16px; background: #f6f8fa; color: #24292e; border: 1px solid #24292e; border-radius: 4px; text-decoration: none; font-size: 14px;">View on GitHub →</a>
+
   </div>
 
   </div>
