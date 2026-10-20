@@ -52,6 +52,8 @@ I build end-to-end analytical solutions that transform complex data into actiona
     <p><strong>Tools:</strong> SQL · Tableau</p>
     <a href="/colorado-broadband/" style="display: inline-block; margin-right: 8px; margin-bottom: 8px; padding: 8px 16px; background: #0366d6; color: white; border-radius: 4px; text-decoration: none; font-size: 14px;">View Project →</a>
     <a href="https://public.tableau.com/app/profile/kristin.mooney/viz/TableauFiberAnalysis/ColoradosBroadbandOpportunity" style="display: inline-block; padding: 8px 16px; background: #f6f8fa; color: #0366d6; border: 1px solid #0366d6; border-radius: 4px; text-decoration: none; font-size: 14px;">View Dashboard →</a>
+     <a href="https://github.com/kristin-mooney/colorado-broadband-analysis" style="display: inline-block; margin-left: 8px; padding: 8px 16px; background: #f6f8fa; color: #24292e; border: 1px solid #24292e; border-radius: 4px; text-decoration: none; font-size: 14px;">View on GitHub →</a>
+
   </div>
 
   <div style="flex: 1; min-width: 280px; border: 1px solid #e1e4e8; border-radius: 8px; padding: 24px;">
@@ -61,6 +63,8 @@ I build end-to-end analytical solutions that transform complex data into actiona
     <p><strong>Tools:</strong> dbt · SQL · Tableau</p>
     <a href="/instacart-analytics/" style="display: inline-block; margin-right: 8px; margin-bottom: 8px; padding: 8px 16px; background: #0366d6; color: white; border-radius: 4px; text-decoration: none; font-size: 14px;">View Project →</a>
     <a href="https://public.tableau.com/app/profile/kristin.mooney/viz/InstacartAnalyticsProject/UnderstandingInstacartShopperBehavior" style="display: inline-block; padding: 8px 16px; background: #f6f8fa; color: #0366d6; border: 1px solid #0366d6; border-radius: 4px; text-decoration: none; font-size: 14px;">View Dashboard →</a>
+        <a href="https://github.com/kristin-mooney/instacart-shopper-analysis" style="display: inline-block; margin-left: 8px; padding: 8px 16px; background: #f6f8fa; color: #24292e; border: 1px solid #24292e; border-radius: 4px; text-decoration: none; font-size: 14px;">View on GitHub →</a>
+
 
 </div>
   <div style="flex: 1; min-width: 280px; border: 1px solid #e1e4e8; border-radius: 8px; padding: 24px;">
