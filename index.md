@@ -59,9 +59,17 @@ I build end-to-end analytical solutions that transform complex data into actiona
     <p><strong>Tools:</strong> dbt · SQL · Tableau</p>
     <a href="/instacart-analytics/" style="display: inline-block; margin-right: 8px; margin-bottom: 8px; padding: 8px 16px; background: #0366d6; color: white; border-radius: 4px; text-decoration: none; font-size: 14px;">View Project →</a>
     <a href="https://public.tableau.com/app/profile/kristin.mooney/viz/InstacartAnalyticsProject/UnderstandingInstacartShopperBehavior" style="display: inline-block; padding: 8px 16px; background: #f6f8fa; color: #0366d6; border: 1px solid #0366d6; border-radius: 4px; text-decoration: none; font-size: 14px;">View Dashboard →</a>
-  </div>
 
 </div>
+  <div style="flex: 1; min-width: 280px; border: 1px solid #e1e4e8; border-radius: 8px; padding: 24px;">
+    <h3 style="margin-top: 0;">⚽ International Women's Soccer: A Data Story</h3>
+    <p style="color: #666; font-style: italic; margin-top: -8px;">Growth, Competition & Team Performance (1991–2026)</p>
+    <p>From 25 nations in 1991 to 200+ in 2025, this three-part Tableau story explores global growth, modern scoring trends, and team KPIs across 6,966 matches. The USA leads with an 80% win rate — but the gap is closing.</p>
+    <p><strong>Tools:</strong> Tableau</p>
+    <a href="https://public.tableau.com/app/profile/kristin.mooney/viz/WomensSoccerAnalysis/InternationalWomensSoccerADataStory19912026" style="display: inline-block; padding: 8px 16px; background: #f6f8fa; color: #0366d6; border: 1px solid #0366d6; border-radius: 4px; text-decoration: none; font-size: 14px;">View Dashboard →</a>
+  </div>
+
+
 
 ---
 
