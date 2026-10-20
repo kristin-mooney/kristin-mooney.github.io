@@ -35,6 +35,8 @@ I build end-to-end analytical solutions that transform complex data into actiona
             font-size: 14px;">
     View Project →
   </a>
+      <a href="https://github.com/kristin-mooney/telecom-component-audit" style="display: inline-block; margin-left: 8px; padding: 8px 16px; background: #f6f8fa; color: #24292e; border: 1px solid #24292e; border-radius: 4px; text-decoration: none; font-size: 14px;">View on GitHub →</a>
+
 </div>
 
 ---
