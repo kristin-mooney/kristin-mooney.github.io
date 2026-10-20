@@ -69,7 +69,7 @@ I build end-to-end analytical solutions that transform complex data into actiona
     <a href="https://public.tableau.com/app/profile/kristin.mooney/viz/WomensSoccerAnalysis/InternationalWomensSoccerADataStory19912026" style="display: inline-block; padding: 8px 16px; background: #f6f8fa; color: #0366d6; border: 1px solid #0366d6; border-radius: 4px; text-decoration: none; font-size: 14px;">View Dashboard →</a>
   </div>
 
-
+  </div>
 
 ---
 
