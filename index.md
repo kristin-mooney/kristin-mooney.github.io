@@ -3,15 +3,13 @@ layout: page
 title: "Welcome to My Portfolio"
 ---
 
-**Hi, I'm Kristin. I turn messy data into solutions that work.** 
+**Kristin Mooney — Senior Business Intelligence & Analytics Professional** 
 
-I'm a Senior Business Intelligence and Data Analytics professional who loves taking a complicated problem, figuring out what's really happening in the data, and building something better.
+I turn messy, multi-system data and ambiguous business problems into practical solutions that work.
 
-My work spans the full analytics lifecycle, from collecting and cleaning data to writing SQL, developing automated audits and controls, investigating root causes, and creating dashboards that help people make better decisions.
+My work spans the full analytics lifecycle, from understanding and preparing data to writing SQL, building automated audits and controls, investigating root causes, and creating reporting that helps stakeholders make better decisions.
 
-What sets me apart is what happens after I learn a business and its systems: I look for ways to improve them. Throughout my career, I've turned manual processes into automated solutions, built analytics where none existed, uncovered problems hidden across complex systems, and created reporting that changed how teams worked.
-
-This portfolio is a collection of projects that show how I approach those problems.
+**My approach: learn the business, understand the data, find the opportunity, and build something better.** 
 
 ---
 
