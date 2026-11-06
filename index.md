@@ -3,9 +3,15 @@ layout: page
 title: "Welcome to My Portfolio"
 ---
 
-**Kristin Mooney** — a Senior Data Analyst specializing in SQL, Power BI, Tableau, data quality auditing, and operational analytics.
+**Hi, I'm Kristin. I turn messy data into solutions that work.** 
 
-I build end-to-end analytical solutions that transform complex data into actionable business decisions. My work combines data engineering, audit design, root cause analysis, and executive reporting to help organizations identify problems, quantify impact, and prioritize action.
+I'm a Senior Business Intelligence and Data Analytics professional who loves taking a complicated problem, figuring out what's really happening in the data, and building something better.
+
+My work spans the full analytics lifecycle, from collecting and cleaning data to writing SQL, developing automated audits and controls, investigating root causes, and creating dashboards that help people make better decisions.
+
+What sets me apart is what happens after I learn a business and its systems: I look for ways to improve them. Throughout my career, I've turned manual processes into automated solutions, built analytics where none existed, uncovered problems hidden across complex systems, and created reporting that changed how teams worked.
+
+This portfolio is a collection of projects that show how I approach those problems.
 
 ---
 
